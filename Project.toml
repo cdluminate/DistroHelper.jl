@@ -1,0 +1,6 @@
+authors = ["Mo Zhou <cdluminate@gmail.com>"]
+name = "DistroHelper"
+uuid = "5e1d1c68-141f-11e9-02f9-0b2b0c35dba7"
+version = "0.1.0"
+
+[deps]
