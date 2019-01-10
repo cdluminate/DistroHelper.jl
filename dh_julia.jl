@@ -1,5 +1,5 @@
 #!/usr/bin/julia
-push!(LOAD_PATH, ".")
+push!(LOAD_PATH, dirname(@__FILE__))
 
 using DistroHelper
 
