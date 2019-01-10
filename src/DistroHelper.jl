@@ -1,3 +1,7 @@
+"""
+Copyright (C) 2019 Mo Zhou <lumin@debian.org>
+MIT/Expat license.
+"""
 module DistroHelper
 
 using Pkg
