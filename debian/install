@@ -1,0 +1,3 @@
+src  usr/share/julia/DistroHelper/
+Project.toml  usr/share/julia/DistroHelper/
+dh_julia.jl  usr/bin/
