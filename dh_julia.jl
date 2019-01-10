@@ -17,6 +17,8 @@ function main(argv)
 	elseif argv[1] in ("gather_stdlib_manifest", )  # requires pretty print
 		result = getfield(DistroHelper, Symbol(argv[1]))(argv[2:end]...)
 		Pkg.TOML.print(result)
+	elseif argv[1] in ("distro_project",)  # no print
+		getfield(DistroHelper, Symbol(argv[1]))(argv[2:end]...)
 	else
 		throw(Base.error("unsupported args"))
 	end

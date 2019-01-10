@@ -65,4 +65,21 @@ function gather_stdlib_manifest()
 	return manifest
 end
 
+
+"""
+Generate Project.toml based on the given METADATA/Registry files.
+Output will be written to pwd.
+"""
+function distro_project(package::AbstractString, dest::Any = nothing)
+	package = Pkg.TOML.parsefile(package)
+	name, uuid = package["name"], package["uuid"]
+	project = Dict{String,Any}()
+	deps = Dict{String,Any}()
+	deps[name] = uuid
+	project["deps"] = deps
+	open((dest==nothing) ? "dh_Project.toml" : dest, "w") do io
+		Pkg.TOML.print(io, project)
+	end
+end
+
 end # module

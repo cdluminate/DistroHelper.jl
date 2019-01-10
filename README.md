@@ -9,6 +9,8 @@ Distribution helper snippets.
 ./dh_julia.jl slug data/JSON/Package.toml data/JSON/Versions.toml
 ./dh_julia.jl slug data/JSON/Package.toml data/JSON/Versions.toml 0.20.0
 ./dh_julia.jl gather_stdlib_manifest
+./dh_julia.jl distro_project data/JSON/Package.toml
+./dh_julia.jl distro_project data/JSON/Package.toml custom_destination
 ./dh_julia.jl depends data/JSON/Deps.toml
 ./dh_julia.jl depends data/JSON/Deps.toml 0.20.0
 ```
