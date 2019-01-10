@@ -13,6 +13,7 @@ Distribution helper snippets.
 ./dh_julia.jl distro_project data/JSON/Package.toml custom_destination
 ./dh_julia.jl depends data/JSON/Deps.toml
 ./dh_julia.jl depends data/JSON/Deps.toml 0.20.0
+./dh_julia.jl distro_manifest data/JSON/Package.toml data/JSON/Versions.toml data/JSON/Deps.toml
 ```
 
 ## API List

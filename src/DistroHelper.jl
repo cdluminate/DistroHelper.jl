@@ -68,7 +68,7 @@ end
 
 """
 Generate Project.toml based on the given METADATA/Registry files.
-Output will be written to pwd.
+Output will be written to pwd if dest is not specified.
 """
 function distro_project(package::AbstractString, dest::Any = nothing)
 	package = Pkg.TOML.parsefile(package)
@@ -79,6 +79,28 @@ function distro_project(package::AbstractString, dest::Any = nothing)
 	project["deps"] = deps
 	open((dest==nothing) ? "dh_Project.toml" : dest, "w") do io
 		Pkg.TOML.print(io, project)
+	end
+end
+
+
+"""
+Generate Manifest.toml based on the given METADATA
+FIXME: WIP
+"""
+function distro_manifest(package::AbstractString, versions::AbstractString, deps::AbstractString, dest::Any=nothing)
+	manifest = gather_stdlib_manifest()
+	d = Dict{String,Any}()
+	package = Pkg.TOML.parsefile(package)
+	versions = Pkg.TOML.parsefile(versions)
+	latest_ver = string(maximum(VersionNumber.(keys(versions))))
+	deps = depends(deps, latest_ver)  # XXX: version?
+	d["uuid"] = package["uuid"]
+	d["version"] = latest_ver
+	d["deps"] = sort(collect(keys(deps)))
+	d["git-tree-sha1"] = versions[latest_ver]["git-tree-sha1"]
+	manifest[package["name"]] = [d]
+	open((dest==nothing) ? "dh_Manifest.toml" : dest, "w") do io
+		Pkg.TOML.print(io, manifest)
 	end
 end
 
