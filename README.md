@@ -1,9 +1,10 @@
 DistroHelper.jl
 ===
 
-Distribution helper snippets.
+Distribution helper snippets (WIP and experimental). For documentation please
+read code or read them in REPL's help mode.
 
-## CLI example
+## CLI examples
 
 ```
 ./dh_julia.jl slug data/JSON/Package.toml data/JSON/Versions.toml
