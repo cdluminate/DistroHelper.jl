@@ -5,8 +5,6 @@ using DistroHelper
 
 function Usage(argv)
 	println("dh_julia -- DistroHelper.jl command line interface")
-	println("./dh_julia.jl slug data/Package.toml data/Versions.toml")
-	println("./dh_julia.jl slug data/Package.toml data/Versions.toml 0.20.0")
 end
 
 function main(argv)

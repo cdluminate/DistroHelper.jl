@@ -15,7 +15,7 @@ function slug(package::AbstractString, versions::AbstractString, version::Any = 
 	Package  = Pkg.TOML.parsefile(package)
 	Versions = Pkg.TOML.parsefile(versions)
 	latest_ver = maximum(VersionNumber.(keys(Versions)))
-	version = (version == nothing) ? latest_ver : version
+	version = string((version == nothing) ? latest_ver : version)
 	uuid = Base.UUID(Package["uuid"])
 	sha1 = Base.SHA1(hex2bytes(Versions[version]["git-tree-sha1"]))
 	return Base.version_slug(uuid,sha1)
