@@ -8,14 +8,14 @@ Distribution helper snippets.
 ```
 ./dh_julia.jl slug data/Package.toml data/Versions.toml
 ./dh_julia.jl slug data/Package.toml data/Versions.toml 0.20.0
-
+./dh_julia.jl depends data/Deps.toml
+./dh_julia.jl depends data/Deps.toml 0.20.0
 ```
 
 ## API List
 
 ```
-12:function slug(package::AbstractString, versions::AbstractString, version::AbstractString)
-27:function slug(package::AbstractString, versions::AbstractString)
+$ ripgrep function
 ```
 
 ### Reference

@@ -38,6 +38,7 @@ function depends(deps::AbstractString, version::Any = nothing)
 	for (k, v) in zip(mask, values(alldeps))
 		if k for (i,j) in v println(i, " = ", repr(j)) end end
 	end
+	return ""
 end
 
 end # module

@@ -13,8 +13,8 @@ function main(argv)
 	if length(argv) == 0
 		Usage(argv)
 		exit(0)
-	elseif argv[1] == "slug"
-		print(DistroHelper.slug(argv[2:end]...))
+	elseif argv[1] in ("slug", "depends")
+		print(getfield(DistroHelper, Symbol(argv[1]))(argv[2:end]...))
 	else
 		throw(Base.error("unsupported args"))
 	end
