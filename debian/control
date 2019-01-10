@@ -1,0 +1,18 @@
+Source: julia-distrohelper
+Section: julia
+Homepage: https://github.com/cdluminate/DistroHelper.jl
+Priority: optional
+Standards-Version: 4.3.0
+Vcs-Git: https://github.com/cdluminate/DistroHelper.jl.git
+Vcs-Browser: https://github.com/cdluminate/DistroHelper.jl
+Maintainer: Mo Zhou <cdluminate@gmail.com>
+Build-Depends:
+ debhelper (>= 12~),
+
+Package: julia-distrohelper
+Architecture: all
+Depends: ${misc:Depends}, ${julia:Depends},
+Description: DistroHelper.jl (dh_julia)
+ DistroHelper.jl (dh_julia)
+ .
+ Experimental WIP.

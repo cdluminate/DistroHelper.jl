@@ -1,0 +1,5 @@
+julia-distrohelper (0.1.0) UNRELEASED; urgency=low
+
+  * Initial release. (Closes: #XXXXXX)
+
+ -- Mo Zhou <cdluminate@gmail.com>  Thu, 10 Jan 2019 23:29:08 +0000
