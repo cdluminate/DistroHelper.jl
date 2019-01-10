@@ -1,6 +1,8 @@
-authors = ["Mo Zhou <cdluminate@gmail.com>"]
 name = "DistroHelper"
 uuid = "5e1d1c68-141f-11e9-02f9-0b2b0c35dba7"
+authors = ["Mo Zhou <cdluminate@gmail.com>"]
 version = "0.1.0"
 
 [deps]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+Pkg = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
