@@ -22,6 +22,7 @@ function slug(package::AbstractString, versions::AbstractString, version::Any = 
 end
 
 
+
 """
 Return the dependencies for a specific version
 
@@ -40,6 +41,28 @@ function depends(deps::AbstractString, version::Any = nothing)
 		if k for (i, j) in v realdeps[i] = j end end
 	end
 	return realdeps
+end
+
+
+"""
+Gather manifest for stdlib
+"""
+function gather_stdlib_manifest()
+	p = "/usr/share/julia/stdlib/v1.0"
+	stdlibs = values(Pkg.Types.gather_stdlib_uuids())
+	manifest = Dict{String,Any}()
+	for lib in stdlibs
+		d = Dict{String,Any}()
+		project = Pkg.TOML.parsefile(joinpath(p, lib, "Project.toml"))
+		name, uuid = project["name"], project["uuid"]
+		d["uuid"] = uuid
+		if haskey(project, "deps")
+			d["deps"] = sort(string.(keys(project["deps"])))
+		end
+		manifest[name] = [d]
+	end
+	#Pkg.TOML.print(manifest)
+	return manifest
 end
 
 end # module
