@@ -26,7 +26,7 @@ slug("Package.toml", "Versions.toml")
 """
 function slug(package::AbstractString, versions::AbstractString)
 	vers = Pkg.TOML.parsefile(versions)
-	latest_ver = maximum(VersionNumber.(k for (k,v) in vers))
+	latest_ver = maximum(VersionNumber.(keys(vers)))
 	return slug(package, versions, string(latest_ver))
 end
 
