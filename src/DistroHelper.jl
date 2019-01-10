@@ -35,10 +35,11 @@ function depends(deps::AbstractString, version::Any = nothing)
 	bounds = map(x -> VersionNumber.(x), split.(keys(alldeps), "-"))
 	ver	= (version == nothing) ? maximum(maximum(bounds)) : VersionNumber(version) 
 	mask = [ver >= x[1] && ver <= x[2] for x in bounds]
+	realdeps = Dict{String,Any}()
 	for (k, v) in zip(mask, values(alldeps))
-		if k for (i,j) in v println(i, " = ", repr(j)) end end
+		if k for (i, j) in v realdeps[i] = j end end
 	end
-	return ""
+	return realdeps
 end
 
 end # module
