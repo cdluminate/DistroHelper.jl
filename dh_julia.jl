@@ -15,7 +15,7 @@ function main(argv)
 		exit(0)
 	elseif argv[1] in ("slug", "depends")  # raw print
 		print(getfield(DistroHelper, Symbol(argv[1]))(argv[2:end]...))
-	elseif argv[1] in ("gather_stdlib_manifest", )  # requires pretty print
+	elseif argv[1] in ("gather_stdlib_manifest", "distro_manifest_")  # requires pretty print
 		result = getfield(DistroHelper, Symbol(argv[1]))(argv[2:end]...)
 		Pkg.TOML.print(result)
 	elseif argv[1] in ("distro_project", "distro_manifest")  # no print

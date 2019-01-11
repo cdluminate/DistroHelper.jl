@@ -93,21 +93,31 @@ end
 
 
 """
-Generate Manifest.toml based on the given METADATA
-FIXME: WIP
+Generate Manifest.toml entry for a specific package
 """
-function distro_manifest(package::AbstractString, versions::AbstractString, deps::AbstractString, dest::Any=nothing)
-	manifest = gather_stdlib_manifest()
+function distro_manifest_(package::AbstractString, versions::AbstractString, deps::AbstractString)
 	d = Dict{String,Any}()
 	package = Pkg.TOML.parsefile(package)
 	versions = Pkg.TOML.parsefile(versions)
 	latest_ver = string(maximum(VersionNumber.(keys(versions))))
 	deps = depends(deps, latest_ver)  # XXX: version?
-	d["uuid"] = package["uuid"]
-	d["version"] = latest_ver
 	d["deps"] = sort(collect(keys(deps)))
 	d["git-tree-sha1"] = versions[latest_ver]["git-tree-sha1"]
+	d["uuid"] = package["uuid"]
+	d["version"] = latest_ver
+	manifest = Dict{String,Any}()
 	manifest[package["name"]] = [d]
+	return manifest
+end
+
+
+"""
+Generate Manifest.toml based on the given METADATA
+FIXME: WIP
+"""
+function distro_manifest(package::AbstractString, versions::AbstractString, deps::AbstractString, dest::Any=nothing)
+	manifest = gather_stdlib_manifest()
+	merge!(manifest, distro_manifest_(package, versions, deps))
 	open((dest==nothing) ? "dh_Manifest.toml" : dest, "w") do io
 		Pkg.TOML.print(io, manifest)
 	end
