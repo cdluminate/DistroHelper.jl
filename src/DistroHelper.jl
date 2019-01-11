@@ -4,6 +4,8 @@ MIT/Expat license.
 """
 module DistroHelper
 
+const JL_REGISTRY_URL = "https://github.com/JuliaRegistries/General/raw/master/"
+
 using Pkg
 
 """
@@ -148,6 +150,18 @@ function distro_merge(p::AbstractString, dest::Any=nothing)
 		Pkg.TOML.print(io, env.manifest)
 	end
 	#Pkg.Types.write_env(Pkg.Types.Context(env=env))
+end
+
+
+"""
+Download metadata/registry of the specified package
+"""
+function metadata(name::AbstractString)
+	baseurl = JL_REGISTRY_URL * "$(uppercase(first(name)))/$(name)"
+	run(`wget -nv -c $(baseurl)/Compat.toml`)
+	run(`wget -nv -c $(baseurl)/Deps.toml`)
+	run(`wget -nv -c $(baseurl)/Package.toml`)
+	run(`wget -nv -c $(baseurl)/Versions.toml`)
 end
 
 end # module
