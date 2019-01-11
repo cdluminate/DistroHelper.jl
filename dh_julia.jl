@@ -1,6 +1,6 @@
 #!/usr/bin/julia
 push!(LOAD_PATH, dirname(@__FILE__))
-push!(LOAD_PATH, "/usr/share/julia/DistroHelper")
+push!(LOAD_PATH, "/usr/share/julia/")
 
 using DistroHelper
 using Pkg
