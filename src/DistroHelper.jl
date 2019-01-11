@@ -123,4 +123,31 @@ function distro_manifest(package::AbstractString, versions::AbstractString, deps
 	end
 end
 
+
+"""
+Merge different Project.toml and Manifest.toml files
+"""
+function distro_merge(p::AbstractString, dest::Any=nothing)
+	packages = filter(x -> isdir(joinpath(p, x)), readdir(p))
+	println("Found $(length(packages)) packages: $packages")
+	env = nothing
+	for package in packages
+		e = Pkg.Types.EnvCache(joinpath(p, package, "Project.toml"))
+		if nothing == env
+			env = e
+		else
+			merge!(env.project["deps"], e.project["deps"])
+			merge!(env.manifest, e.manifest)
+		end
+	end
+	mkpath(dest)
+	open(joinpath(nothing==dest ? "." : dest, "Project.toml"), "w") do io
+		Pkg.TOML.print(io, env.project)
+	end
+	open(joinpath(nothing==dest ? "." : dest, "Manifest.toml"), "w") do io
+		Pkg.TOML.print(io, env.manifest)
+	end
+	#Pkg.Types.write_env(Pkg.Types.Context(env=env))
+end
+
 end # module
