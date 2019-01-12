@@ -5,13 +5,8 @@ push!(LOAD_PATH, "/usr/share/julia/")
 using DistroHelper
 using Pkg
 
-function Usage(argv)
-	println("dh_julia -- DistroHelper.jl command line interface")
-end
-
 function main(argv)
 	if length(argv) == 0
-		Usage(argv)
 		exit(0)
 	elseif argv[1] in ("slug", "depends")  # raw print
 		print(getfield(DistroHelper, Symbol(argv[1]))(argv[2:end]...))
