@@ -164,4 +164,21 @@ function metadata(name::AbstractString)
 	run(`wget -nv -c $(baseurl)/Versions.toml`)
 end
 
+
+"""
+Download not only the metadata, but also the source tarball.
+https://github.com/JuliaIO/JSON.jl/archive/v0.20.0.tar.gz
+"""
+function download(name::AbstractString, version::Any=nothing)
+	metadata(name)
+	repo = Pkg.TOML.parsefile("Package.toml")["repo"]
+	repo = replace(repo, r"\.git$" => "")
+	if version == nothing
+		versions = Pkg.TOML.parsefile("Versions.toml")
+		version = string(maximum(VersionNumber.(keys(versions))))
+	end
+	dest = lowercase("julia-$(name)_$(version).orig.tar.gz")
+	run(`wget -nv -c $repo/archive/v$version.tar.gz -O $dest`)
+end
+
 end # module
