@@ -1,3 +1,3 @@
 src/DistroHelper.jl  usr/share/julia/
-dh_julia.jl  usr/bin/
+dh_julia  usr/bin/
 Debhelper/Sequence/julia.pm  usr/share/perl5/Debian/Debhelper/Sequence/
