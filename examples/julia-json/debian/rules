@@ -1,0 +1,24 @@
+#!/usr/bin/make -f
+#export DH_VERBOSE=1
+JLPKG_NAME     = JSON
+JLPKG_CONTENT  = $(filter-out debian,$(wildcard *))
+JLPKG_SLUG     = $(shell dh_julia slug debian/metadata/Package.toml debian/metadata/Versions.toml)
+export HOME    = $(shell pwd)
+
+%:
+	dh $@ --with julia
+
+override_dh_auto_configure:
+	truncate -s0 debian/install
+	for item in $(JLPKG_CONTENT); do \
+		echo $$item usr/share/julia/packages/$(JLPKG_NAME)/$(JLPKG_SLUG)/ \
+		>> debian/install; \
+	done
+	dh_julia distro_project debian/metadata/Package.toml Project.toml
+	dh_julia distro_manifest debian/metadata/Package.toml \
+		debian/metadata/Versions.toml debian/metadata/Deps.toml Manifest.toml
+	echo Manifest.toml /usr/share/julia/__distrohelper__/JSON/ >> debian/install
+	echo Project.toml /usr/share/julia/__distrohelper__/JSON/ >> debian/install
+
+override_dh_auto_test:
+	-JULIA_LOAD_PATH=src:$(JULIA_LOAD_PATH) julia test/runtests.jl

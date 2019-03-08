@@ -1,0 +1,17 @@
+Source: julia-json
+Section: julia
+Homepage: https://github.com/JuliaIO/JSON.jl
+Priority: optional
+Standards-Version: 4.2.1
+#Vcs-Git:
+#Vcs-Browser:
+Maintainer: Mo Zhou <cdluminate@gmail.com>
+Build-Depends: debhelper-compat (= 12),
+               julia (>= 1.0.0~),
+               julia-distrohelper,
+
+Package: julia-json
+Architecture: all
+Depends: ${misc:Depends}, julia (>= 1.0.0~),
+Description: JSON.jl
+ FIXME

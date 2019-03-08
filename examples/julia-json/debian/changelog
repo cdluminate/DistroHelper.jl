@@ -1,0 +1,5 @@
+julia-json (0.20.0-1) UNRELEASED; urgency=low
+
+  * Initial release. (Closes: #XXXXXX)
+
+ -- Mo Zhou <cdluminate@gmail.com>  Tue, 08 Jan 2019 05:39:37 +0000
